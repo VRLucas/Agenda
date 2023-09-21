@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validador = require('validator');
-const bcrytjs = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const { async } = require('regenerator-runtime');
 
 const RegisterSchema = new mongoose.Schema({
@@ -29,6 +29,24 @@ class Register {
             this.user = await RegisterModel.create(this.body);
         } catch (e) {
             console.log(e);
+        }
+
+
+    }
+    async sinIn(){
+        this.valida();
+        this.user = await RegisterModel.findOne({ email: this.body.email });
+
+        if(!this.user){
+            this.erros.push('Usuário não encontrado');
+            return;
+        }
+
+        if(!bcryptjs.compareSync(this.body.senha,this.user.senha)){
+            this.erros.push('Senha Inválida');
+            this.user = null;
+            return;
+
         }
 
 

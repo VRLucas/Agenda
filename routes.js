@@ -8,6 +8,8 @@ const registerController = require('./src/controllers/registerController');
 route.get('/', homeController.index);
 
 route.get('/login',loginController.index);
+route.post('/login',loginController.login);
+route.get('/login/logout',loginController.logout);
 route.get('/register', registerController.index);
 route.post('/register', registerController.formulario);
 
