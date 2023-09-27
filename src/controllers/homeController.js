@@ -1,9 +1,8 @@
 
-exports.index = (req, res) => {
-    res.render('index', {
-        titulo: `Este será o <span style= 'color: red;'>titulo da pagina</span>`,
-        numeros: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    });
+const Contato = require('../models/contatoModel')
+exports.index = async (req, res) => {
+    const contato = await Contato.buscaContatos();
+    res.render('index', { contato });
     return;
 
 

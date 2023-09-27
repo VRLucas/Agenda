@@ -19,7 +19,7 @@ exports.formulario = async (req, res) => {
         }
         req.flash('success', 'Seu usúario foi criado com Sucesso');
         req.session.save(function () {
-            return res.redirect('/register');
+            return res.redirect('/login');
 
         });
 

@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs');
 const { async } = require('regenerator-runtime');
 
 const RegisterSchema = new mongoose.Schema({
+    nome: {type: String, require: true},
     email: { type: String, required: true },
     senha: { type: String, required: true }
 });
@@ -21,9 +22,9 @@ class Register {
         if (this.erros.length > 0) return;
         await this.userExists();
         if (this.erros.length > 0) return;
-        const salt = bcrytjs.genSaltSync();
+        const salt = bcryptjs.genSaltSync();
 
-        this.body.senha = bcrytjs.hashSync(this.body.senha, salt);
+        this.body.senha = bcryptjs.hashSync(this.body.senha, salt);
         try {
 
             this.user = await RegisterModel.create(this.body);
@@ -35,7 +36,7 @@ class Register {
     }
     async sinIn(){
         this.valida();
-        this.user = await RegisterModel.findOne({ email: this.body.email });
+        this.user = await RegisterModel.findOne({ email: this.body.email, nome: this.body.nome });
 
         if(!this.user){
             this.erros.push('Usuário não encontrado');
@@ -73,6 +74,7 @@ class Register {
             }
         }
         this.body = {
+            nome: this.body.nome,
             email: this.body.email,
             senha: this.body.senha
         };

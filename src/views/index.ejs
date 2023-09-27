@@ -10,21 +10,46 @@
             <p class="text-center lead">Seus contados estão aqui em Baixo</p>
           </div>
           <%- include('./includes/menssagens.ejs')%>
-            <div class="responsive-table">
-              <table class="table my-3">
-                <thead>
-                  <tr>
-                    <td>Nome</td>
-                    <td>Sobrenome</td>
-                    <td>Email</td>
-                    <td>Telefone</td>
-                  </tr>
-                </thead>
+            <% if(contato.length> 0) { %>
+              <div class="responsive-table">
+                <table class="table my-3">
+                  <thead>
+                    <tr>
+                      <td>Nome</td>
+                      <td>Sobrenome</td>
+                      <td>Telefone</td>
+                      <td>Email</td>
+                      <td>Data Criação</td>
+                      <td class="text-center">Ações</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <% contato.forEach(contato=> { %>
+                    <tr>
+                      <td>
+                        <%= contato.nome %>
+                      </td>
+                      <td>
+                        <%= contato.sobrenome %>
+                      </td>
+                      <td>
+                        <%= contato.telefone %>
+                      </td>
+                      <td>
+                        <%= contato.email %>
+                      </td>
+                      <td><%= contato.criadoEm %></td>
+                      <td><a href="/contato/index/<%= contato._id %>">Editar</a></td>
+                      <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td>
+                    </tr>
+                    <% }); %>
+                </table>
+              </div>
+              <% } else { %>
+                <p class="text-center lead">Não existem contatos na sua agenda.</p>
+                <% } %>
 
-              </table>
-            </div>
-
-            <div class="col-lg-2"></div>
+                  <div class="col-lg-2"></div>
         </div>
       </div>
 
