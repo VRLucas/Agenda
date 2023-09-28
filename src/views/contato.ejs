@@ -10,9 +10,9 @@
                         <div class="col-lg">
                             <%- include('./includes/menssagens.ejs')%>
                                 <% if(contato._id){%>
-                                    <form  action="/contato/edit/<%= contato._id %>" method='post'>
+                                    <form class="form-cadastro"  action="/contato/edit/<%= contato._id %>" method='post'>
                                         <% }else{ %>
-                                            <form  action="/contato/cadastro" method="post">
+                                            <form class="form-cadastro" action="/contato/cadastro" method="post">
                                                 <%}%>
                                                     <input type="hidden" name="_csrf" value=<%=csrfToken %>>
                                                     <div class="form-group align-items-center w-50 p-3">
