@@ -54,8 +54,8 @@ app.use(route);
 // Para rodar aplicação
 app.on('pronto', () => {
     app.listen(3000, () => {
-        console.log('Acesse: http://localhost:3000');
-        console.log('Servidor Executando na Porta 3000');
+        console.log('Acesse: http://localhost:3001');
+        console.log('Servidor Executando na Porta 3001');
     });
 
 })
